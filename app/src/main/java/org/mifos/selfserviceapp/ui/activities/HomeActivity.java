@@ -13,6 +13,7 @@ import android.view.View;
 import org.mifos.selfserviceapp.R;
 import org.mifos.selfserviceapp.api.local.PreferencesHelper;
 import org.mifos.selfserviceapp.ui.activities.base.BaseActivity;
+import org.mifos.selfserviceapp.ui.fragments.HomeScreenFragment;
 import org.mifos.selfserviceapp.ui.fragments.ClientAccountsFragment;
 import org.mifos.selfserviceapp.ui.fragments.ClientChargeFragment;
 import org.mifos.selfserviceapp.ui.fragments.RecentTransactionsFragment;
@@ -56,11 +57,11 @@ public class HomeActivity extends BaseActivity implements
 
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            toolbar.setTitle(getString(R.string.accounts));
+            toolbar.setTitle("Home");
         }
 
         clientId = getIntent().getExtras().getLong(Constants.CLIENT_ID);
-        replaceFragment(ClientAccountsFragment.newInstance(clientId), false,  R.id.container);
+        replaceFragment(HomeScreenFragment.newInstance(clientId), false,  R.id.container);
 
         setupNavigationBar();
     }
@@ -75,6 +76,10 @@ public class HomeActivity extends BaseActivity implements
 
         // select which item to open
         switch (item.getItemId()) {
+            case R.id.item_home:
+                replaceFragment(HomeScreenFragment.newInstance(clientId),
+                        false, R.id.container);
+                break;
             case R.id.item_accounts:
                 replaceFragment(ClientAccountsFragment.newInstance(clientId),
                         false, R.id.container);
